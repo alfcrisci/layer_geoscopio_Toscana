@@ -3,6 +3,7 @@
 List of WMS layers from  GeoSCOPIO http://www.regione.toscana.it/-/geoscopio
 
 name
+
 1                                              Regione Toscana - Geoscopio WMS - AMBITI AMMINISTRATIVI
 
 2                                                    Regione Toscana - Geoscopio WMS - AMBITI CENSUARI
