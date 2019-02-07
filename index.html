@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+    <title>Example Leaflet</title>
+
+    <!-- Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js" integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg==" crossorigin=""></script>
+ <!-- font -->
+<link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.66.0/dist/L.Control.Locate.min.css" />
+
+<script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.66.0/dist/L.Control.Locate.min.js" charset="utf-8"></script>	
+  </head> 
+  <style>
+    body {
+      padding: 0;
+      margin: 0;
+    }
+    html, body, #map {
+      height: 100%;
+    }
+  </style>
+
+  <body>
+    <div id="map"></div>
+    
+    <script>
+    var map = new L.Map('map', { center: new L.LatLng(43.2,11.7), zoom: 11, attributionControl:true, zoomControl:false, minZoom:6});    
+    var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+  	var osmAttrib='Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors';
+  	var osm = new L.TileLayer(osmUrl, {minZoom: 12, maxZoom: 22, attribution: osmAttrib});
+    map.addLayer(osm);
+
+    var wmsLayer_wmsambamm= L.tileLayer.wms("http://www502.regione.toscana.it/wmsraster/com.rt.wms.RTmap/wms?map=wmsofc&", {
+        layers: 'rt_ofc.10k10',
+        format: 'image/png',
+        transparent: true
+    });
+ 
+
+   L.control.layers(null, {
+       'Geoscopio Regione Toscana wmsofc Layer rt_ofc.10k10': wmsLayer_wmsambamm
+    }, {
+      collapsed: false
+    }).addTo(map);
+ 
+map.addLayer(wmsLayer_wmsambamm);
+
+L.control.locate({
+   locateOptions: {
+           maxZoom: 18
+}}).addTo(map);
+    </script>
+</html>
